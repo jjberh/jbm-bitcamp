@@ -5,7 +5,17 @@ url = Blueprint("url", __name__)
 def main():
     return "Hello"
 
-@url.route("/signup", methods = "GET")
+@url.route("/signup", methods = ["POST"])
+def signup():
+    data = request.json
+    email = data.get("email")
+    username = data.get("username")
+    password = data.get("password")
+
+    if not email or not username or not password:
+        return jsonify("Missing email, username, or password")
+
+
 
 @url.route("/login")
 def login():
