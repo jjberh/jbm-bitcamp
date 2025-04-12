@@ -12,6 +12,7 @@ def create_app():
     supabase_url = os.getenv("DB_URL") #Uses our env var
     supabase_key = os.getenv("DB_BACKEND_KEY")
     app.supabase = create_client(supabase_url, supabase_key)
+    
     app.register_blueprint(routes.url)
 
 
