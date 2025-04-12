@@ -10,4 +10,4 @@ Tech
     -Flask
     -React
     -SQL or Supabase
-    -
+    -  
