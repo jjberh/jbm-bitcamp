@@ -26,6 +26,8 @@ function App() {
 
   return (
     <div>
+      <div className="whole-page">
+
       <h1>Project</h1>
 
       {loading && <p>Loading users...</p>}
@@ -41,10 +43,13 @@ function App() {
               <p><strong>Username:</strong> {user.username}</p>
               <p><strong>Email:</strong> {user.email}</p>
             </div>
+            
           ))}
         </div>
       )}
     </div>
+    </div>
+    
   );
 }
 
