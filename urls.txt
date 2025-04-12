@@ -1,1 +1,2 @@
 FlaskURL = https://jbm-bitcamp.onrender.com/
+Vercel = https://jbm-bitcamp.vercel.app/
