@@ -12,7 +12,8 @@ def create_app():
     CORS(app, origins=[
         "https://jbm-bitcamp-jjberhs-projects.vercel.app/",
         "https://jbm-bitcamp.vercel.app/",
-        "https://jbm-bitcamp-git-frontend-jjberhs-projects.vercel.app/"
+        "https://jbm-bitcamp-git-frontend-jjberhs-projects.vercel.app/",
+        "http://localhost:5175"
     ])
     #Connect to Supabase
     supabase_url = os.getenv("DB_URL") #Uses our env var
