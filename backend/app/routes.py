@@ -19,7 +19,9 @@ def signup():
         result = current_app.supabase.auth.sign_up({
 
             "email": email,
+            "username": username,
             "password": password
+            
 
         })
         return jsonify(result), 200
