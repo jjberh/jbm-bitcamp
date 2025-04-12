@@ -28,7 +28,7 @@ def signup():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
    
-@url.route("/users")
+@url.route("/users", strict_slashes=False)
 def users():
     response = (
         current_app.supabase.table("users").select("*").execute()
