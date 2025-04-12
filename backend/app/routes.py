@@ -13,7 +13,8 @@ def signup():
     password = data.get("password")
 
     if not email or not username or not password:
-        return jsonify("Missing email, username, or password")
+        return jsonify({"Missing email, username, or password"})
+   
 
 
 
