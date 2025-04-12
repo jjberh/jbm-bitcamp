@@ -16,6 +16,13 @@ def signup():
         return jsonify({"Missing email, username, or password"})
    
 
+@url.route("/users/")
+def users():
+    response = (
+        current_app.supabase.table("users").select("*").execute()
+    )
+
+    return response
 
 
 @url.route("/login")
