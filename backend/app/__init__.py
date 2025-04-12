@@ -1,7 +1,8 @@
 from flask import Flask
 from supabase import create_client, Client
 from dotenv import load_dotenv
-import os, routes
+import os
+from routes import routes
 
 def create_app():
 
