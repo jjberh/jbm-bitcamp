@@ -34,7 +34,7 @@ def users():
         current_app.supabase.table("users").select("*").execute()
     )
 
-    return response
+    return response.data
 
 
 @url.route("/login")
