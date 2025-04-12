@@ -13,7 +13,7 @@ def signup():
     password = data.get("password")
 
     if not email or not username or not password:
-        return jsonify({"Missing email, username, or password"})
+        return jsonify({"Missing email, username, or password"}), 400
     
     try:
         result = current_app.supabase.auth.sign_up({
