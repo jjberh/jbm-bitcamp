@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Dashboard.css';
+import { supabase } from '../lib/supabase';
 
 const Dashboard = () => {
     const [userData, setUserData] = useState(null);
@@ -17,10 +18,16 @@ const Dashboard = () => {
 
     const fetchUserData = async () => {
         try {
-            const token = localStorage.getItem('token');
-            const response = await axios.get('http://localhost:5000/dashboard', {
+            // Get the session from Supabase
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                setError('Not authenticated');
+                return;
+            }
+
+            const response = await axios.get('https://jbm-bitcamp.onrender.com/dashboard', {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${session.access_token}`
                 }
             });
             setUserData(response.data);
@@ -45,10 +52,16 @@ const Dashboard = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const token = localStorage.getItem('token');
-            await axios.post('http://localhost:5000/dashboard', formData, {
+            // Get the session from Supabase
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                setError('Not authenticated');
+                return;
+            }
+
+            await axios.post('https://jbm-bitcamp.onrender.com/dashboard', formData, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${session.access_token}`
                 }
             });
             setIsEditing(false);
