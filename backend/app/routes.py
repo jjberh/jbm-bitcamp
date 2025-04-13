@@ -32,23 +32,40 @@ def signup():
             "options": signup_options
         })
 
-        #current_app.supabase.table("users").insert({"user_id": result.user.id, "username": username, "email": email}).execute()
-
         return jsonify(result.user.id), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
 @url.route("/dashboard", methods = ["GET", "POST"])
 def dashboard():
+    # Get the current user's session
+    session = current_app.supabase.auth.get_session()
+    if not session:
+        return jsonify({"error": "Unauthorized"}), 401
     
-    #if request.method == "POST":
-        #data = request.json
-        #pass
-        #current_app.supabase.table("")
+    user_id = session.user.id
     
-    #elif request.method == "GET":
-        #pass
-    return "dashboard"
+    if request.method == "GET":
+        try:
+            # Get user's profile information
+            response = current_app.supabase.table("users").select("*").eq("user_id", user_id).execute()
+            if not response.data:
+                return jsonify({"error": "User not found"}), 404
+            return jsonify(response.data[0]), 200
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+    
+    elif request.method == "POST":
+        try:
+            data = request.json
+            if not data:
+                return jsonify({"error": "No data provided"}), 400
+            
+            # Update user's information
+            response = current_app.supabase.table("users").update(data).eq("user_id", user_id).execute()
+            return jsonify(response.data[0]), 200
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
 
 @url.route("/users", strict_slashes=False)
 def users():
