@@ -100,7 +100,7 @@ def login():
             "email": id,
             "password": password
         })
-        return jsonify(result.user), 200
+        return jsonify(result.user.id), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
