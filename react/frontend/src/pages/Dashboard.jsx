@@ -19,25 +19,37 @@ const Dashboard = () => {
     const fetchUserData = async () => {
         try {
             // Get the session from Supabase
-            const { data: { session } } = await supabase.auth.getSession();
-            if (!session) {
-                setError('Not authenticated');
+            const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+            
+            if (sessionError) {
+                console.error('Session error:', sessionError);
+                setError('Authentication error');
                 return;
             }
+
+            if (!session) {
+                console.log('No session found');
+                setError('Please log in to view your dashboard');
+                return;
+            }
+
+            console.log('Session found:', session);
 
             const response = await axios.get('https://jbm-bitcamp.onrender.com/dashboard', {
                 headers: {
                     'Authorization': `Bearer ${session.access_token}`
                 }
             });
+
+            console.log('Dashboard response:', response.data);
             setUserData(response.data);
             setFormData({
                 username: response.data.username || '',
                 email: response.data.email || ''
             });
         } catch (err) {
-            setError('Failed to fetch user data');
-            console.error(err);
+            console.error('Dashboard error:', err);
+            setError('Failed to fetch user data: ' + (err.response?.data?.error || err.message));
         }
     };
 
@@ -52,10 +64,10 @@ const Dashboard = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Get the session from Supabase
-            const { data: { session } } = await supabase.auth.getSession();
-            if (!session) {
-                setError('Not authenticated');
+            const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+            
+            if (sessionError || !session) {
+                setError('Please log in to update your profile');
                 return;
             }
 
@@ -67,13 +79,33 @@ const Dashboard = () => {
             setIsEditing(false);
             fetchUserData(); // Refresh the data
         } catch (err) {
-            setError('Failed to update user data');
+            setError('Failed to update user data: ' + (err.response?.data?.error || err.message));
             console.error(err);
         }
     };
 
+    if (error) {
+        return (
+            <div className="dashboard-container">
+                <h1>Dashboard</h1>
+                <div className="error-message">{error}</div>
+                <button 
+                    className="edit-btn" 
+                    onClick={() => window.location.href = '/login'}
+                >
+                    Go to Login
+                </button>
+            </div>
+        );
+    }
+
     if (!userData) {
-        return <div className="dashboard-loading">Loading...</div>;
+        return (
+            <div className="dashboard-container">
+                <h1>Dashboard</h1>
+                <div className="dashboard-loading">Loading...</div>
+            </div>
+        );
     }
 
     return (
