@@ -3,7 +3,8 @@
 import os
 import requests
 from dotenv import load_dotenv
-from dining import get_dining_meals  # Import the dining hall function
+from app import dining 
+from dining import *  # Import the dining hall function
 
 load_dotenv()
 
