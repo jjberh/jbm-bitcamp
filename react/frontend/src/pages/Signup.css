@@ -1,0 +1,16 @@
+.whole-page {
+    padding: 30px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.95);
+    color: black;
+    border-radius: 10px;
+    width: 650px;
+    height: 750px;
+  
+    /* Stronger, multi-layered shadow for pop effect */
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.1),       /* soft low shadow */
+      0 8px 16px rgba(0, 0, 0, 0.15),     /* medium depth */
+      0 16px 32px rgba(0, 0, 0, 0.1);     /* deeper layer */
+  }
+  
