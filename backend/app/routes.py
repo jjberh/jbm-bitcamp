@@ -23,8 +23,6 @@ def signup():
             "email": email,
             "username": username,
             "password": password
-            
-
         })
 
         current_app.supabase.table("users").insert({"user_id": result.user.id, "username": username, "email": email}).execute()
@@ -36,8 +34,7 @@ def signup():
 @url.route("/dashboard")
 def dashboard():
     return "dashboard"
-    
-   
+
 @url.route("/users", strict_slashes=False)
 def users():
     response = (
@@ -46,10 +43,34 @@ def users():
 
     return response.data
 
-
 @url.route("/login")
 def login():
-    return "Logged"
+    data = request.json
+    id = data.get("id")
+    password = data.get("password")
+
+    if not id or not password:
+        return jsonify({"Missing email/username, or password"}), 400
+    
+
+    # using username to login
+    if "@" not in id: 
+        response = current_app.supabase.table("users").select("email").eq("username", id).execute()
+
+        if response.data:
+            id = response.data[0]["email"]
+        else:
+            return jsonify({"Error": "Username not found"}, 404)
+    
+    # proceed with login
+    try:
+        result = current_app.supabase.auth.sign_in_with_password({
+            "email": id,
+            "password": password
+        })
+        return jsonify(result), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @url.route("/recommend-meals", methods=["POST"])
 def recommend_meals():
