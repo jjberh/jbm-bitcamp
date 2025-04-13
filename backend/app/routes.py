@@ -51,10 +51,9 @@ def users():
 def login():
     return "Logged"
 
-@url.route("/recommended-meals", methods = ["POST"])
-def recommende_meals():
-
+@url.route("/recommend-meals", methods=["POST"])
+def recommend_meals():
+    
     user_data = request.json or {}
-
-    reccomendation = get_meal_recommendation(user_data)
-    return jsonify({"reccomendation": reccomendation}), 200
+    recommendation = get_meal_recommendation(user_data)
+    return jsonify({"recommendation": recommendation}), 200
