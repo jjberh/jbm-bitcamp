@@ -43,7 +43,7 @@ def users():
 
     return response.data
 
-@url.route("/login")
+@url.route("/login", methods=["POST"])
 def login():
     data = request.json
     id = data.get("id")
