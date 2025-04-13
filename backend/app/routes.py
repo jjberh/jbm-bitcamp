@@ -17,7 +17,7 @@ def signup():
     if not email or not username or not password:
         return jsonify({"Missing email, username, or password"}), 400
     
-    options = {
+    option = {
             "data": {
                 "username": username
             }
@@ -29,7 +29,7 @@ def signup():
             "email": email,
             "username": username,
             "password": password
-        }, options=options)
+        }, options=option)
 
         #current_app.supabase.table("users").insert({"user_id": result.user.id, "username": username, "email": email}).execute()
 
