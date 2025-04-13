@@ -7,7 +7,7 @@ load_dotenv()
 TERPALERT_BASE_URL = os.getenv("TERPALERT_BASE_URL")  
 
 def get_dining_meals():
-    endpoint = "/meals"  # Update this according to the API spec
+    endpoint = "/daily-items/"  # Update this according to the API spec
     url = f"{TERPALERT_BASE_URL}{endpoint}"
     try:
         response = requests.get(url)

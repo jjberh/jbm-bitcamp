@@ -18,7 +18,7 @@ def get_meal_recommendation(user_data):
     user_data should be a dictionary containing either:
       - "macros": {"protein": value, "carbs": value, "fats": value}
     or
-      - "height", "weight", "age", "goal" (e.g., "lose" or "gain")
+      - "height", "weight", "age", "goal" (e.g., "lose", "maintain", or "gain")
     """
     
     # Fetches from dining hall meal data from TerpAlert API
@@ -48,7 +48,7 @@ def get_meal_recommendation(user_data):
             f"Protein: {macros.get('protein')}, Carbs: {macros.get('carbs')}, Fats: {macros.get('fats')}. "
             "Below are some dining hall meals and their nutritional details:\n"
             f"{dining_summary}\n"
-            "Please suggest one or more meal options that best meet these macro goals."
+            "Please suggest a meal plan for the day that best meet these macro goals."
         )
     elif all(key in user_data for key in ["height", "weight", "age", "goal"]):
         height = user_data["height"]
@@ -60,7 +60,7 @@ def get_meal_recommendation(user_data):
             "please calculate my recommended daily macros. "
             "Below are some dining hall meals and their nutritional details:\n"
             f"{dining_summary}\n"
-            "Then suggest one or more meal options available that match these macros."
+            "Then suggest a meal plan for the day that matches these macros."
         )
     else:
         return "Insufficient data provided. Please provide either daily macros or your physical details (height, weight, age, goal)."

@@ -60,7 +60,7 @@ def login():
         if response.data:
             id = response.data[0]["email"]
         else:
-            return jsonify({"Error": "Username not found"}, 404)
+            return jsonify({"Error": "Username not found"}), 404
     
     # proceed with login
     try:
