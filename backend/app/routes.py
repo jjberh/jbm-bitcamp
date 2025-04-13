@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify, current_app
-from app import gemini
-from gemini import *
+from app.gemini import *
 
 url = Blueprint("url", __name__)
 
