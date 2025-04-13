@@ -40,26 +40,39 @@ const Login = () => {
       <div className="whole-page">
         <h2>Login</h2>
 
-        <input
-          type="text"
-          placeholder="Email or Username"
-          value={id}
-          onChange={(e) => setId(e.target.value)}
-        /><br />
+        <div className="form-group">
+          <input
+            type="text"
+            placeholder="Email or Username"
+            value={id}
+            onChange={(e) => setId(e.target.value)}
+          />
+        </div>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        /><br />
+        <div className="form-group">
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
 
-        <button onClick={handleLogin} disabled={!isFormValid}>
+        <button 
+          className="login-btn" 
+          onClick={handleLogin} 
+          disabled={!isFormValid}
+        >
           Login
         </button>
 
-        {message && <p style={{ color: 'green' }}>{message}</p>}
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {message && <p className="success-message">{message}</p>}
+        {error && <p className="error-message">{error}</p>}
+
+        <div className="signup-link">
+          <p>Don't have an account?</p>
+          <a href="/signup">Sign Up</a>
+        </div>
       </div>
     </div>
   );
