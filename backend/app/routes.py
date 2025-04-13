@@ -1,4 +1,6 @@
 from flask import Blueprint, request, jsonify, current_app
+from backend.app.gemini import get_meal_recommendation
+
 url = Blueprint("url", __name__)
 
 @url.route("/")
@@ -49,3 +51,10 @@ def users():
 def login():
     return "Logged"
 
+@url.route("/recommended-meals", methods = ["POST"])
+def recommende_meals():
+
+    user_data = request.json or {}
+
+    reccomendation = get_meal_recommendation(user_data)
+    return jsonify({"reccomendation": reccomendation}), 200
