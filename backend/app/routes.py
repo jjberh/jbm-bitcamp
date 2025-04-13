@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify, current_app
-from backend.app.gemini import get_meal_recommendation
+from app import gemini
+from gemini import *
 
 url = Blueprint("url", __name__)
 
