@@ -25,7 +25,7 @@ def signup():
 
         })
 
-        current_app.supabase.table("users").insert({"user_id": result.user.id, "username": username, "email": email}).execute()
+        current_app.supabase.table("users").insert({"id": result.user.id, "username": username, "email": email}).execute()
 
         return jsonify(result), 200
     except Exception as e:
