@@ -33,7 +33,7 @@ def signup():
     
 @url.route("/dashboard")
 def dashboard():
-
+    return
     
    
 @url.route("/users", strict_slashes=False)
@@ -48,3 +48,4 @@ def users():
 @url.route("/login")
 def login():
     return "Logged"
+
