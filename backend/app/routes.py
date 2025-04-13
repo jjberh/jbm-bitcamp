@@ -17,15 +17,21 @@ def signup():
     if not email or not username or not password:
         return jsonify({"Missing email, username, or password"}), 400
     
+    options = {
+            "data": {
+                "username": username
+            }
+        }
+
     try:
         result = current_app.supabase.auth.sign_up({
 
             "email": email,
             "username": username,
             "password": password
-        })
+        }, options=options)
 
-        current_app.supabase.table("users").insert({"user_id": result.user.id, "username": username, "email": email}).execute()
+        #current_app.supabase.table("users").insert({"user_id": result.user.id, "username": username, "email": email}).execute()
 
         return jsonify(result.user), 200
     except Exception as e:
