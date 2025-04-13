@@ -34,12 +34,14 @@ def signup():
 @url.route("/dashboard", methods = ["GET", "POST"])
 def dashboard():
     
-    if request.method == "POST":
-        pass
+    #if request.method == "POST":
+        #data = request.json
+        #pass
+        #current_app.supabase.table("")
     
-    elif request.method == "GET":
-        pass
-
+    #elif request.method == "GET":
+        #pass
+    return "dashboard"
 
 @url.route("/users", strict_slashes=False)
 def users():
