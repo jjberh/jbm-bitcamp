@@ -30,6 +30,11 @@ def signup():
         return jsonify(result), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+@url.route("/dashboard")
+def dashboard():
+
+    
    
 @url.route("/users", strict_slashes=False)
 def users():
