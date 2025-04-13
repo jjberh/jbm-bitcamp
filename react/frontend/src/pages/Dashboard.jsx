@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Dashboard.css';
-import { supabase } from '../lib/supabase';
 
 const Dashboard = () => {
     const [userData, setUserData] = useState(null);
@@ -18,29 +17,7 @@ const Dashboard = () => {
 
     const fetchUserData = async () => {
         try {
-            // Get the session from Supabase
-            const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-            
-            if (sessionError) {
-                console.error('Session error:', sessionError);
-                setError('Authentication error');
-                return;
-            }
-
-            if (!session) {
-                console.log('No session found');
-                setError('Please log in to view your dashboard');
-                return;
-            }
-
-            console.log('Session found:', session);
-
-            const response = await axios.get('https://jbm-bitcamp.onrender.com/dashboard', {
-                headers: {
-                    'Authorization': `Bearer ${session.access_token}`
-                }
-            });
-
+            const response = await axios.get('https://jbm-bitcamp.onrender.com/dashboard');
             console.log('Dashboard response:', response.data);
             setUserData(response.data);
             setFormData({
@@ -64,18 +41,7 @@ const Dashboard = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-            
-            if (sessionError || !session) {
-                setError('Please log in to update your profile');
-                return;
-            }
-
-            await axios.post('https://jbm-bitcamp.onrender.com/dashboard', formData, {
-                headers: {
-                    'Authorization': `Bearer ${session.access_token}`
-                }
-            });
+            await axios.post('https://jbm-bitcamp.onrender.com/dashboard', formData);
             setIsEditing(false);
             fetchUserData(); // Refresh the data
         } catch (err) {

@@ -11,12 +11,19 @@ const Home = () => {
           </div>
         </header>
 
-        {/* Navigation to Signup */}
-        <Link to="/signup">
-          <button>Get Started</button>
-        </Link>
+        <div className="home-buttons">
+          {/* Navigation to Signup */}
+          <Link to="/signup">
+            <button className="home-btn">Get Started</button>
+          </Link>
 
-        <h5>Already created account? Log in</h5>
+          <div className="login-section">
+            <p>Already have an account?</p>
+            <Link to="/login">
+              <button className="home-btn login-btn">Log In</button>
+            </Link>
+          </div>
+        </div>
       </div>
     </>
   );
