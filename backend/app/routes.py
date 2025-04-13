@@ -35,7 +35,7 @@ def signup():
     
 @url.route("/dashboard")
 def dashboard():
-    return
+    return "dashboard"
     
    
 @url.route("/users", strict_slashes=False)
