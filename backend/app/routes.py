@@ -27,11 +27,11 @@ def signup():
 
         current_app.supabase.table("users").insert({"user_id": result.user.id, "username": username, "email": email}).execute()
 
-        print(current_app.supabase._supabase_key)
-        
+    
+
         return jsonify(result.user), 200
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": str(e), "key":current_app.supabase._supabase_key }), 500
     
 @url.route("/dashboard", methods = ["GET", "POST"])
 def dashboard():
