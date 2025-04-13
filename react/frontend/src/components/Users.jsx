@@ -16,7 +16,10 @@ function Users() {
       {users.map(user => (
         <div key={user.id}>
           <p><strong>Username:</strong> {user.username}</p>
+          <input type='text' placeholder="Enter Username" onChange={(e) => setDate(e.target.value)}/>
           <p><strong>Email:</strong> {user.email}</p>
+          <input type='text' placeholder="Enter Email" onChange={(e) => setDate(e.target.value)}/>
+
         </div>
       ))}
     </div>
