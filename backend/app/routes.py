@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify, current_app
-from app.gemini import *
+from app import gemini
 
 url = Blueprint("url", __name__)
 
@@ -55,5 +55,5 @@ def login():
 def recommend_meals():
     
     user_data = request.json or {}
-    recommendation = get_meal_recommendation(user_data)
+    recommendation = gemini.get_meal_recommendation(user_data)
     return jsonify({"recommendation": recommendation}), 200

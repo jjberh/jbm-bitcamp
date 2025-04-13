@@ -3,8 +3,7 @@
 import os
 import requests
 from dotenv import load_dotenv
-from app import dining 
-from dining import *  # Import the dining hall function
+from app import dining  # Import the dining hall function
 
 load_dotenv()
 
@@ -23,7 +22,7 @@ def get_meal_recommendation(user_data):
     """
     
     # Fetches from dining hall meal data from TerpAlert API
-    dining_data = get_dining_meals()
+    dining_data = dining.get_dining_meals()
     dining_summary = ""
     
     if dining_data:
