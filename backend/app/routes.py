@@ -27,7 +27,7 @@ def signup():
 
         current_app.supabase.table("users").insert({"user_id": result.user.id, "username": username, "email": email}).execute()
 
-        return jsonify(result), 200
+        return jsonify(result.user), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
@@ -68,7 +68,7 @@ def login():
             "email": id,
             "password": password
         })
-        return jsonify(result), 200
+        return jsonify(result.user), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
