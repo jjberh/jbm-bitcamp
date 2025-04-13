@@ -13,7 +13,7 @@ def create_app():
         "https://jbm-bitcamp-jjberhs-projects.vercel.app",
         "https://jbm-bitcamp.vercel.app",
         "https://jbm-bitcamp-git-frontend-jjberhs-projects.vercel.app",
-        "http://localhost:5175"
+        "http://localhost:5177"
     ])
     
     #Connect to Supabase

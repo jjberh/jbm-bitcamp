@@ -31,9 +31,15 @@ def signup():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
-@url.route("/dashboard")
+@url.route("/dashboard", methods = ["GET", "POST"])
 def dashboard():
-    return "dashboard"
+    
+    if request.method == "POST":
+        pass
+    
+    elif request.method == "GET":
+        pass
+
 
 @url.route("/users", strict_slashes=False)
 def users():
